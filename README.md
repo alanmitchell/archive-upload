@@ -2,7 +2,7 @@
 Script to compress, archive and upload data files to AWS S3.  The project
 that inspired creation of this script was a project to record electric utility
 powerhouse data (e.g. voltage, frequency, power) using a Raspberry Pi.  The
-data collection script recorded measurement values in CSV data files and recorded
+data collection script records measurement values in CSV data files and records
 application error and other logged information into text log files.  This script
 then compresses those files, stores them locally on the Pi in archive directories
 and also uploads the files to an AWS S3 bucket.
@@ -25,6 +25,10 @@ Some of the features of this script are:
 * If the script fails to upload files to AWS S3 due to loss of Internet connectivity
   or any other reason, uploads will be retried each subsequent run of the script until
   successful uploads are achieved.
+* The script uses the bz2 compression algorithm, generally providing high levels
+  of compression when applied to text data files.  These compressed files are archived
+  locally and uploaded to AWS S3.  The original data file is deleted after successfully
+  archiving the file on the local system.
 
 ## Requirements
 
@@ -40,7 +44,8 @@ assuming "pip3" is the Python 3 pip command.
 
 The script uses the `boto3` package to upload to AWS S3 buckets. `boto3` expects
 to find suitable credentials in the `~/.aws` directory or in environment variables,
-as described on [this AWS page.](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html)
+as described on [this AWS page.](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) .  The credentials must allow for writing to the S3 buckets 
+that are identified in this script's configuration file.
 
 This script is meant to be run periodically through use of cron or a similar scheduling
 tool.
@@ -49,7 +54,7 @@ tool.
 
 Here is an example cron job line to run the script:
 
-    20 * * * * /usr/bin/python3 /home/pi/archive-upload/archive-upload.py /home/pi/archive.config
+    20 * * * * /usr/bin/python3 /home/pi/archive-upload/archive-upload.py /home/pi/archive-config.yaml
 
 The script will run every hour at 20 minutes past the hour.  There is one required command line
 argument for the script, which is the path to the script configuration file.  The format of this

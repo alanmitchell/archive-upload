@@ -1,0 +1,48 @@
+# The directory where the log files (errors & info messages) should
+# be written to.  If this not provided, log files are written to
+# ~/.archive-upload/log .
+log-file-dir: /home/tabb99/arch-test/log
+
+# The logging level to record in the log file.  See Python's
+# logging module for more information.  If this configuration
+# line is not provided, logging messages of INFO and more severe
+# are logged.
+log-level: INFO
+
+# A list of directories to watch for data files
+directories:
+
+  - directory: /home/tabb99/arch-test/data    # a directory to scan for data files
+
+    # list of file patterns that identify the data files to archive and upload.  Only
+    # files that have not been modified in the last "finished-secs" seconds are 
+    # archived and uploaded.
+    file-patterns: 
+      - pattern: "*.csv"       # must be a pattern compatible with Python "glob" function
+        finished-secs: 60      # optional, defaults to 5 seconds
+      - pattern: "*.txt"       # can add as many patterns as desired
+
+    # where to store compressed data files on local system.
+    archive-dir: /home/tabb99/arch-test/archive/data
+
+    # the AWS S3 bucket and base key identifying where the data files should
+    # be uploaded to.  The data file name is added to this base key.  In the
+    # example below, "dataacq.analysisnorth.com" is the S3 bucket name, and
+    # "powerhouse/kwethluk/data" is the base part of the key.  If a data file
+    # of "xyz.csv.bz2" is uploaded, it will be uploaded to the key:
+    # "powerhouse/kwethluk/data/xyz.csv.bz2".
+    bucket-and-key: dataacq.analysisnorth.com/powerhouse/kwethluk/data
+
+    # Optional parameter.  If present, the script will delete any of the locally
+    # archived data files that are older than the number of days specified by
+    # the parameter.
+    delete-after: 365          # days
+
+  # Can have any number of "directory" entries.
+  - directory: /home/tabb99/arch-test/daily-logs
+    file-patterns:
+      - pattern: "*.log"
+        finished-secs: 10    # seconds
+    archive-dir: /home/tabb99/arch-test/archive/daily-logs
+    bucket-and-key: dataacq.analysisnorth.com/powerhouse/kwethluk/daily-logs
+    delete-after: 30         # days
