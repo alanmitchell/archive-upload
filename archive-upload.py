@@ -168,5 +168,3 @@ finally:
         # save the list of archive files that still need to be uploaded.
         with p_up_pending.open('wb') as fout:
             pickle.dump(upload_pending, fout)
-
-
