@@ -28,7 +28,8 @@ config = yaml.safe_load(open(cfg_fn, 'r'))
 
 # set the log level. Because we are setting this on the logger, it will apply
 # to all handlers (unless maybe you set a specific level on a handler?).
-logging.root.setLevel(getattr(logging, config['log-level']))
+log_level = config.get('log-level', 'INFO')
+logging.root.setLevel(getattr(logging, log_level))
 
 # create a rotating file handler
 # Create Log file directory if it does not exist.
@@ -84,7 +85,7 @@ try:
 
             # number of seconds of age that make a file deemed complete.  If not
             # provided, default to 5 seconds which essentially assumes that any age
-            # file is read to be archived.
+            # file is ready to be archived.
             age_test = pat['finished-secs'] if 'finished-secs' in pat else 5.0
 
             for p_f in p_dr.glob(pat['pattern']):
@@ -92,7 +93,7 @@ try:
                 # p_f is a Path to a file matching the pattern.
                 # determine the time elapsed since last modification of the file.
                 file_age = time.time() - p_f.stat().st_mtime
-                print(f'{p_f}, age: {file_age}, age test: {age_test}')
+                # print(f'{p_f}, age: {file_age}, age test: {age_test}')
 
                 if file_age > age_test:
                     # make Path to upcoming compressed, archived copy of file.
