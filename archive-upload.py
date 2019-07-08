@@ -17,14 +17,16 @@ import logging, logging.handlers
 import yaml
 import boto3
 
-# Create Application working directory if it does not exist.
+# --- Create Application working directory if it does not exist.
 p_app = Path('~').expanduser() / '.archive-upload'
 p_app.mkdir(exist_ok=True)
 
-# Read in the configuration file that controls execution of the script.
+# --- Read in the configuration file that controls execution of the script.
 # It is the first and required command line argument.
 cfg_fn = sys.argv[1]
 config = yaml.safe_load(open(cfg_fn, 'r'))
+
+# ---------- Set Up Error and Info Logging
 
 # set the log level. Because we are setting this on the logger, it will apply
 # to all handlers (unless maybe you set a specific level on a handler?).
@@ -52,6 +54,10 @@ console_h.setFormatter(formatter)
 # add the handlers to the root logger
 logging.root.addHandler(fh)
 logging.root.addHandler(console_h)
+
+# ----- Logging setup done
+
+# ---- Main processing starts here.
 
 try:
     logging.info('Script start.')
