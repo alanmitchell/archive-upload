@@ -17,6 +17,8 @@ directories:
     # list of file patterns that identify the data files to archive and upload.  Only
     # files that have not been modified in the last "finished-secs" seconds are 
     # archived and uploaded.
+    # Note that the "pattern" values below need to be surrounded by quotes because
+    # they contain special characters.
     file-patterns: 
       - pattern: "*.csv"       # must be a pattern compatible with Python "glob" function
         finished-secs: 60      # optional, defaults to 5 seconds
@@ -31,6 +33,8 @@ directories:
     # "powerhouse/kwethluk/data" is the base part of the key.  If a data file
     # of "xyz.csv.bz2" is uploaded, it will be uploaded to the key:
     # "powerhouse/kwethluk/data/xyz.csv.bz2".
+    # The AWS credentials on the local machine must allow writing into this 
+    # S3bucket.
     bucket-and-key: dataacq.analysisnorth.com/powerhouse/kwethluk/data
 
     # Optional parameter.  If present, the script will delete any of the locally

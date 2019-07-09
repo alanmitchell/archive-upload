@@ -62,4 +62,15 @@ configuration file is discussed in the next section.
 
 ## Configuration File
 
-blah
+A configuration file controls the operation of the script.  The configuration file is
+in [YAML format](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html).
+Indentation matters in the YAML format, so try to follow the indentation in the sample
+configuration file exactly.
+
+Here is a [sample configuration file](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+that shows all possible configuration options.  Documentation for each of the
+configuration options is provided in this sample file and will not be repeated here.
+
+The configuration file can have any name and can be located anywhere on the
+system.  The full path to the configuration file is a required command line argument
+for the script.
