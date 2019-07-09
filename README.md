@@ -67,7 +67,7 @@ in [YAML format](https://docs.ansible.com/ansible/latest/reference_appendices/YA
 Indentation matters in the YAML format, so try to follow the indentation in the sample
 configuration file exactly.
 
-Here is a [sample configuration file](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html)
+Here is a [sample configuration file](https://github.com/alanmitchell/archive-upload/blob/master/archive-config-example.yaml)
 that shows all possible configuration options.  Documentation for each of the
 configuration options is provided in this sample file and will not be repeated here.
 
