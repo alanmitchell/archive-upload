@@ -7,11 +7,6 @@ application error and other logged information into text log files.  This script
 then compresses those files, stores them locally on the Pi in archive directories
 and also uploads the files to an AWS S3 bucket.
 
-## Funding
-
-Funding for development of this script was provided by the Alaska Center for 
-Energy and Power. 
-
 ## Features
 
 Some of the features of this script are:
